@@ -1,9 +1,16 @@
-/***********************************************************************************************/
-/* Demo Styles */
-/***********************************************************************************************/
+
+/**********************************************************************
+Form Page Styles
+**********************************************************************/
+
 * {
   -webkit-font-smoothing: antialiased;
 }
+
+html {
+  font-family: 'Rubik', sans-serif;
+}
+
 body {
   color: #141414;
   font-size: 14px;
@@ -57,51 +64,65 @@ a:hover {
   background-color: #f8edeb;
   border: 1px solid #dd5f4b;
 }
-/***********************************************************************************************/
-/* Form elements styling */
-/***********************************************************************************************/
+
+/**********************************************************************
+Form elements styling
+**********************************************************************/
 
 #contact {
   padding: 2em 5em;
 }
 
-#contact input,
-#contact textarea {
+#contact form input,
+#contact form textarea {
   margin-top: 10px;
-  padding: 5px 0px;
-  max-width: none;
+  padding: 10px;
+  min-width: 280px;
   border-top-style: none;
-  border-right-style: none;
-  border-bottom-width: 4px;
-  border-bottom-color: #C5D0C1;
+  border-width: 4px;
+  border-color: #C5D0C1;
   border-left-style: none;
-  background-color: transparent;
+  background-color: #C5D0C1;
   box-shadow: none;
   font-size: 22px;
   color: #6C6C6C;
+  outline-color: #6C6C6C;
 }
-#contact label,
-#contact button {
+#contact form label,
+#contact form button {
   font-family: rubik, sans-serif;
   font-weight: 500;
   color: #6c6c6c;
 }
-#contact label {
-  margin-bottom: 70px;
+#contact form label {
+  display: block;
 }
-#contact button {
-  border: 4px solid #C5D0C1;
+#contact form button {
+  color: #C5D0C1;
+  margin-top: 20px;
+  border: none;
+  background-color: #6c6c6c;
   border-radius: 100px;
   width: 150px;
   height: 40px;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
 }
-#contact button:hover {
+#contact form button:hover {
+  color: #6c6c6c;
+  /*border-color: #C5D0C1;*/
   background-color: #C5D0C1;
 }
-#contact textarea {
-  height: 150px;
-  resize: none;
-  padding: 0;
-  width: 100%;
+#contact form textarea {
+  height: 100px;
+  resize: both;
+}
+
+.input-container,
+.textarea-container {
+  padding: 20px 0;
+}
+
+.input-container p {
+  color: #6C6C6C;
+  
 }

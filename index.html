@@ -8,6 +8,7 @@
 	<meta name="author" content="HSNYC">
 
 	<!-- Stylesheets -->
+	<link href="http://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/normalize.css" />
 	<link rel="stylesheet" href="css/styles.css" />
 
@@ -25,22 +26,26 @@
 
 	<section id="contact">
 
-		<form>
-				<div>
+		<form action="js/validate.php" method="POST" id="form" novalidate>
+				<div class="input-container">
 					<label for="name">Name*</label>
-	        <input type="text" name="name" id="name" />
+	        <input type="text" name="name" id="name" class="validate-locally"/>
+					<p class="errors"></p>
 				</div>
 
-				<div>
+				<div class="input-container">
 	        <label for="email">Email*</label>
-	        <input type="email" name="email" id="email"/>
-				</div>
-				<div>
-	        <label for="textarea">Leave us a message*</label>
-	        <textarea name="textarea" id="textarea"></textarea>
+	        <input type="email" name="email" id="email" class="validate-locally"/>
+					<p class="errors"></p>
 				</div>
 
-        <button class="float-right clearfix">Send Message</button>
+				<div class="textarea-container">
+	        <label for="textarea">Leave us a message*</label>
+	        <textarea name="textarea" id="textarea" class="validate-locally"></textarea>
+					<p class="errors"></p>
+				</div>
+
+        <button>Send Message</button>
     </form>
 
 	</section> <!-- end of contact section -->
@@ -48,7 +53,10 @@
 	<footer class="form-footer">
 		<p><small>a form by <a href="https://hsnyc.co/">HSNYC</a></small></p>
 	</footer>
-	<script >
+
+	<!-- scripts -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="js/validate.js"></script>
 
 </body>
 </html>
