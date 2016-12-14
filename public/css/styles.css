@@ -122,7 +122,6 @@ Form elements styling
   padding: 20px 0;
 }
 
-.input-container p {
-  color: #6C6C6C;
-  
+.errors {
+  color: red;
 }
