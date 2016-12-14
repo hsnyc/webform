@@ -70,6 +70,11 @@ function checkEmptyFields(name, value){
 				return error = true;
 			}
 
+			else {
+				// Clear the error message below the field
+				sibling.html("");
+			}
+
 			break;
 
 			}
