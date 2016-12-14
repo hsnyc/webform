@@ -18,15 +18,15 @@ $( "#form" ).on( "keyup", "input.validate-locally", function() {
 /*************************************************************************
 Check empty fields
 *************************************************************************/
-function checkEmptyFields(value){
+function checkEmptyFields(name, value){
 
 	var errorText = "",
-	error = false,
-	field = $("#form .validate-locally");
+	error = false;
+	// field = $("#form .validate-locally");
 	// siblings = field.siblings( ".errors" );
 
 	// Test for which field is sent
-	switch ( field.attr( "name" ) ) {
+	switch ( name ) {
 
 		case "name":
 
@@ -59,8 +59,7 @@ function checkEmptyFields(value){
 			break;
 
 		case "textarea":
-
-			var sibling = $("input[name='textarea']").siblings( ".errors" );
+			var sibling = $("textarea[name='textarea']").siblings( ".errors" );
 
 			if ($.trim(value) == "" || value == null) {
 				console.log("Textarea is empty");
@@ -86,9 +85,9 @@ $( "#form" ).submit(function(e) {
 	e.preventDefault();
 
 //Get input fields and set some variables
-var name = 	$("#name").val(),
-email = $("#email").val(),
-textarea = $("#textarea").val();
+var name = 	$("#name"),
+email = $("#email"),
+textarea = $("#textarea");
 
 var inputs = [name, email, textarea];
 
@@ -103,9 +102,14 @@ var inputs = [name, email, textarea];
 // 	console.log("looping: " + inp);
 // }
 
-inputs.forEach(function() {
-	checkEmptyFields(inputs);
-});
+// inputs.forEach(function(input) {
+//
+// });
+
+inputs.forEach(function(field) {
+	checkEmptyFields( field.attr('name'), field.val() );
+})
+
 
 	if (checkEmptyFields() == true) {
 			//stop here
