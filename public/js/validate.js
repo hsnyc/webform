@@ -8,26 +8,17 @@ var expEmail = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2
 
 
 /*************************************************************************
-Validate form on typing
-*************************************************************************/
-$( "#form" ).on( "keyup", "input.validate-locally", function() {
-	validateField( $(this) );
-});
-
-
-/**********
-yes declaring a GLOBAL for errors
-***********/
-// var error = false;
+yes, declaring a GLOBAL for errors
+**************************************************************************/
+var error = false;
 
 /*************************************************************************
-Check empty fields
+Perform input fields validation
 *************************************************************************/
-function checkEmptyFields(name, value, error){
+function validateFields(name, value){
 
 	var errorText = "";
-	// field = $("#form .validate-locally");
-	// siblings = field.siblings( ".errors" );
+	error = false;
 
 	// Test for which field is sent
 	switch ( name ) {
@@ -36,16 +27,29 @@ function checkEmptyFields(name, value, error){
 
 			var sibling = $("input[name='name']").siblings( ".errors" );
 
+			//check for empty values
 			if ($.trim(value) == "" || value == null) {
 
-				console.log("Name is empty");
+				// console.log("Name is empty");
 				errorText = "Please enter your name!<br />";
 
 				// Display the error message below the field
 				sibling.html(errorText);
 				error = true;
-				console.log(error1);
+			}
 
+			//check for numbers or other characters in name
+			else if ( !expLettersOnly.test( value ) ) {
+				errorText = "The name can only contain letters and spaces!";
+
+				// Display the error message below the field
+				sibling.html(errorText);
+				error = true;
+			}
+
+			else {
+				// Clear the error message below the field
+				sibling.html("");
 			}
 
 			break;
@@ -54,14 +58,29 @@ function checkEmptyFields(name, value, error){
 
 			var sibling = $("input[name='email']").siblings( ".errors" );
 
+			//check for empty values
 			if ($.trim(value) == "" || value == null) {
 
-				console.log("Email is empty");
+				// console.log("Email is empty");
 				errorText = "Please enter your email!<br />";
 
 				// Display the error message below the field
 				sibling.html(errorText);
 				error = true;
+			}
+
+			//check for valid email format
+			else if ( !expEmail.test( value ) ) {
+				errorText = "The email address format is invalid!";
+
+				// Display the error message below the field
+				sibling.html(errorText);
+				error = true;
+			}
+
+			else {
+				// Clear the error message below the field
+				sibling.html("");
 			}
 
 			break;
@@ -70,9 +89,10 @@ function checkEmptyFields(name, value, error){
 
 			var sibling = $("textarea[name='textarea']").siblings( ".errors" );
 
+			//check for empty values
 			if ($.trim(value) == "" || value == null) {
 
-				console.log("Textarea is empty");
+				// console.log("Textarea is empty");
 				errorText = "Please enter your message!<br />";
 
 				// Display the error message below the field
@@ -87,13 +107,10 @@ function checkEmptyFields(name, value, error){
 
 			break;
 
-			}
+		}//<-- end switch -->//
 
-			console.log("b4 exit:" + error);
 			// return error;
-
 }
-
 
 /*************************************************************************
 On form submit, do an AJAX call
@@ -108,43 +125,29 @@ email = $("#email"),
 textarea = $("#textarea");
 
 var inputs = [name, email, textarea];
-var error;
+
 //Check if input fields are empty
 for (var i = 0; i < inputs.length; i++) {
-	checkEmptyFields( inputs[i].attr('name'), inputs[i].val(), error );
-	console.log("looping: " + inputs[i].attr('name'));
-}
+	validateFields( inputs[i].attr('name'), inputs[i].val());
 
-// for each(var inp in inputs) {
-// 	checkEmptyFields(inp);
-// 	console.log("looping: " + inp);
-// }
-
-// inputs.forEach(function(input) {
-//
-// });
+//break loop if error is encountered
+	if (error == true) {
+		break;
+	}
+}//<-- end of for loop
 
 // inputs.forEach(function(field) {
 // 	checkEmptyFields( field.attr('name'), field.val() );
 // })
 
-// console.log(checkEmptyFields());
-
 	if (error == true) {
 			//stop here
-			console.log("Got to checkEmptyFields");
+			console.log("Got ERRORS");
 	}
-
-	//Check for name min length
-	else if (!validateLength( name, 2 )) {
-		errorText += "The name is too short!<br />";
-
-		// Display the error message below the field
-		siblings.html(errorText);
-	}
-
 
 	else {
+
+		console.log("NO ERRORS");
 
 		// Get the form action
 		var $this = $( this ),
@@ -165,53 +168,6 @@ for (var i = 0; i < inputs.length; i++) {
 		);
 	}
 
-
 });
 
-
-/*************************************************************************
-Function that checks if a field has the correct minimum length
-/************************************************************************/
-function validateLength( fieldValue, minLength ) {
-	// We remove trailing and leading whitespace
-	return ( $.trim( fieldValue ).length > minLength );
-}
-
-
-/*************************************************************************
-Function that validates a field
-/************************************************************************/
-function validateField( field ) {
-	var errorText = "",
-		error = false,
-		value = field.val(),
-		siblings = field.siblings( ".errors" );
-
-	// Test for which field is sent
-	switch ( field.attr( "name" ) ) {
-		case "name":
-
-			if ( !expLettersOnly.test( value ) ) {
-				error = true;
-				errorText += "The name can only contain letters and spaces!";
-			}
-
-			break;
-
-		case "email":
-			if ( !expEmail.test( value ) ) {
-				error = true;
-				errorText += "The email address format is invalid!";
-			}
-
-			break;
-
-	}
-
-	// Display the error message below the field
-	siblings.html(errorText);
-
-	// If there are errors return false
-	return !error;
-}
 });
