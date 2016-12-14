@@ -15,13 +15,17 @@ $( "#form" ).on( "keyup", "input.validate-locally", function() {
 });
 
 
+/**********
+yes declaring a GLOBAL for errors
+***********/
+// var error = false;
+
 /*************************************************************************
 Check empty fields
 *************************************************************************/
-function checkEmptyFields(name, value){
+function checkEmptyFields(name, value, error){
 
-	var errorText = "",
-	error = false;
+	var errorText = "";
 	// field = $("#form .validate-locally");
 	// siblings = field.siblings( ".errors" );
 
@@ -33,12 +37,15 @@ function checkEmptyFields(name, value){
 			var sibling = $("input[name='name']").siblings( ".errors" );
 
 			if ($.trim(value) == "" || value == null) {
+
 				console.log("Name is empty");
 				errorText = "Please enter your name!<br />";
 
 				// Display the error message below the field
 				sibling.html(errorText);
-				return error = true;
+				error = true;
+				console.log(error1);
+
 			}
 
 			break;
@@ -48,26 +55,29 @@ function checkEmptyFields(name, value){
 			var sibling = $("input[name='email']").siblings( ".errors" );
 
 			if ($.trim(value) == "" || value == null) {
+
 				console.log("Email is empty");
 				errorText = "Please enter your email!<br />";
 
 				// Display the error message below the field
 				sibling.html(errorText);
-				return error = true;
+				error = true;
 			}
 
 			break;
 
 		case "textarea":
+
 			var sibling = $("textarea[name='textarea']").siblings( ".errors" );
 
 			if ($.trim(value) == "" || value == null) {
+
 				console.log("Textarea is empty");
 				errorText = "Please enter your message!<br />";
 
 				// Display the error message below the field
 				sibling.html(errorText);
-				return error = true;
+				error = true;
 			}
 
 			else {
@@ -78,6 +88,9 @@ function checkEmptyFields(name, value){
 			break;
 
 			}
+
+			console.log("b4 exit:" + error);
+			// return error;
 
 }
 
@@ -95,12 +108,12 @@ email = $("#email"),
 textarea = $("#textarea");
 
 var inputs = [name, email, textarea];
-
+var error;
 //Check if input fields are empty
-// for (var i = 0, i < inputs.length, i++) {
-// 	checkEmptyFields(inputs[i]);
-// 	console.log("looping: " + inputs[i]);
-// }
+for (var i = 0; i < inputs.length; i++) {
+	checkEmptyFields( inputs[i].attr('name'), inputs[i].val(), error );
+	console.log("looping: " + inputs[i].attr('name'));
+}
 
 // for each(var inp in inputs) {
 // 	checkEmptyFields(inp);
@@ -111,12 +124,13 @@ var inputs = [name, email, textarea];
 //
 // });
 
-inputs.forEach(function(field) {
-	checkEmptyFields( field.attr('name'), field.val() );
-})
+// inputs.forEach(function(field) {
+// 	checkEmptyFields( field.attr('name'), field.val() );
+// })
 
+// console.log(checkEmptyFields());
 
-	if (checkEmptyFields() == true) {
+	if (error == true) {
 			//stop here
 			console.log("Got to checkEmptyFields");
 	}
