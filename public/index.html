@@ -25,9 +25,7 @@
 	</header>
 
 	<section id="contact">
-
-	<div style="width:400px;">
-		
+		<div class="ajax-message"></div>
 		<form action="js/validate.php" method="POST" id="form" novalidate>
 				<div class="input-container">
 					<label for="name">Name*</label>
@@ -43,20 +41,14 @@
 
 				<div class="textarea-container">
 	        <label for="textarea">Leave us a message*</label>
-	        <textarea name="textarea" id="textarea" class="validate-locally"></textarea>
+	        <textarea name="message" id="textarea" class="validate-locally"></textarea>
 					<p class="errors"></p>
 				</div>
 
         <button>Send Message</button>
     </form>
-	</div>
-
 
 	</section> <!-- end of contact section -->
-
-
-
-
 
 	<footer class="form-footer">
 		<p><small>a form by <a href="https://hsnyc.co/">HSNYC</a></small></p>
