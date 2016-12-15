@@ -41,18 +41,10 @@ a:hover {
   padding: 1em 5em;
 }
 
-.form-errors {
-  color: red;
-  font-size: 80%;
-  display: block;
-  font: sans-serif;
-}
-
 .ajax-message {
   background-color: #FAFAFA;
   display: none;
   padding: 1em;
-  position: absolute;
   right: 3em;
   top: 3em;
 }
@@ -109,7 +101,6 @@ Form elements styling
 }
 #contact form button:hover {
   color: #6c6c6c;
-  /*border-color: #C5D0C1;*/
   background-color: #C5D0C1;
 }
 #contact form textarea {
