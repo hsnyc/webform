@@ -21,12 +21,31 @@ $( "#form" ).submit(function(e) {
 			action,
 			$this.serialize(),
 			function( data ) {
+
+				// Depending on the nature of the message, we apply success or error classes
+				if (data.includes('Success!')) {
+					console.log("Success!");
+
+					$( ".ajax-message" ).removeClass( "ajax-error" ).addClass( "ajax-success" );
+
+					//hide form
+					$("#contact form").css("display", "none");
+
+				}
+
+				else if (data.includes('Error!')){
+					console.log("Errors!");
+
+					$( ".ajax-message" ).removeClass( "ajax-success" ).addClass( "ajax-error" );
+
+				}
+
 				// We display the returned message
 				$( ".ajax-message" ).html( data ).show();
 
-				// Depending on the nature of the message, we apply success or error classes
-				$( ".ajax-message:contains('Error!')" ).removeClass( "ajax-success" ).addClass( "ajax-error" );
-				$( ".ajax-message:contains('Success!')" ).removeClass( "ajax-error" ).addClass( "ajax-success" );
+
+				// $( ".ajax-message:contains('Error!')" ).removeClass( "ajax-success" ).addClass( "ajax-error" );
+				// $( ".ajax-message:contains('Success!')" ).removeClass( "ajax-error" ).addClass( "ajax-success" );
 			}
 		);
 	});
