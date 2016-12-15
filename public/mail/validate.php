@@ -66,15 +66,26 @@ if ($message == "" || $message == null) {
 
 // If no errors, echo the results
 if (!$errorExists) {
-	echo "<h3>Success! The form has been submitted!</h3>"
-		. "<p>Details:</p>"
-		. "<ul>"
-		. "<li>Name: $name</li>"
-		. "<li>Email: $email</li>"
-		. "<li>Message: $message</li>"
-		. "</ul>";
 
-		//send form here
+	//process mail
+	include 'processmail.php';
+
+	if ($mailSent) {
+
+		echo "<h3>Success! The form has been submitted!</h3>"
+			. "<p>Details:</p>"
+			. "<ul>"
+			. "<li>Name: $name</li>"
+			. "<li>Email: $email</li>"
+			. "<li>Message: $message</li>"
+			. "</ul>";
+
+		// header('Location: thank-you.php');
+		exit;
+	}
+
+
+
 
 } else {
 	echo "<h3>Error! Please address the following issues:</h3>"
