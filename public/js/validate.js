@@ -85,9 +85,9 @@ function validateFields(name, value){
 
 			break;
 
-		case "textarea":
+		case "message":
 
-			var sibling = $("textarea[name='textarea']").siblings( ".errors" );
+			var sibling = $("textarea[name='message']").siblings( ".errors" );
 
 			//check for empty values
 			if ($.trim(value) == "" || value == null) {
@@ -135,10 +135,6 @@ for (var i = 0; i < inputs.length; i++) {
 		break;
 	}
 }//<-- end of for loop
-
-// inputs.forEach(function(field) {
-// 	checkEmptyFields( field.attr('name'), field.val() );
-// })
 
 	if (error == true) {
 			//stop here
