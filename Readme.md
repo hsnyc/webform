@@ -1,7 +1,6 @@
 # webform
 
-A simple web form.
-with Js and php validation, and a php mail processor.
+A simple web form with Js and php validation, and a php mail processor.
 
 # Setup
 
